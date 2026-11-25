@@ -1,0 +1,113 @@
+{
+  "config_schema": [
+    {
+      "key": "intro",
+      "type": "section",
+      "options": []
+    },
+    {
+      "key": "billing_info",
+      "type": "section",
+      "options": []
+    },
+    {
+      "key": "api_key",
+      "type": "secret",
+      "options": []
+    },
+    {
+      "key": "model",
+      "type": "select",
+      "options": [
+        "gpt-oss-120b",
+        "Qwen3.5-397B-A17B",
+        "Mistral-Small-3.2-24B-Instruct-2506",
+        "qwen3.6-35b-a3b",
+        "gpt-oss-20b",
+        "custom"
+      ]
+    },
+    {
+      "key": "fast_model",
+      "type": "select",
+      "options": [
+        "Mistral-Small-3.2-24B-Instruct-2506",
+        "gpt-oss-20b",
+        "qwen3.6-35b-a3b",
+        "gpt-oss-120b",
+        "custom"
+      ]
+    },
+    {
+      "key": "custom_model",
+      "type": "string",
+      "options": []
+    },
+    {
+      "key": "reasoning",
+      "type": "select",
+      "options": ["none", "low", "medium", "high"]
+    },
+    {
+      "key": "max_tokens",
+      "type": "number",
+      "options": []
+    }
+  ],
+  "actions": ["test_connection"],
+  "widgets": [
+    {
+      "key": "usage",
+      "settings": []
+    }
+  ],
+  "scene_triggers": [
+    {
+      "key": "error",
+      "fields": [
+        {
+          "key": "kind",
+          "options": [
+            "auth",
+            "project",
+            "rate_limit",
+            "too_large",
+            "model",
+            "unreachable",
+            "timeout",
+            "server"
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "kind",
+          "type": "string"
+        },
+        {
+          "key": "message",
+          "type": "string"
+        },
+        {
+          "key": "use",
+          "type": "string"
+        },
+        {
+          "key": "model",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "key": "recovered",
+      "fields": [],
+      "variables": [
+        {
+          "key": "down_minutes",
+          "type": "number"
+        }
+      ]
+    }
+  ],
+  "scene_actions": []
+}

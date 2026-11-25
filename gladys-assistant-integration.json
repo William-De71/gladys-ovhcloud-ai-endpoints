@@ -1,0 +1,533 @@
+{
+  "manifest_version": 1,
+  "type": "ai",
+  "name": "OVHcloud AI Endpoints",
+  "description": {
+    "en": "Run the Gladys assistant on OVHcloud AI Endpoints: open models hosted in Europe.",
+    "fr": "L’assistant Gladys sur OVHcloud AI Endpoints : des modèles ouverts hébergés en Europe.",
+    "de": "Der Gladys-Assistent auf OVHcloud AI Endpoints: offene Modelle, gehostet in Europa.",
+    "es": "El asistente de Gladys en OVHcloud AI Endpoints: modelos abiertos alojados en Europa."
+  },
+  "version": "0.1.0",
+  "docker_image": "ghcr.io/william-de71/gladys-ovhcloud-ai-endpoints:0.1.0",
+  "gladys_version": ">=5.3.0",
+  "categories": ["assistants"],
+  "keywords": [
+    "ovh",
+    "ovhcloud",
+    "gpt-oss",
+    "qwen",
+    "mistral",
+    "llm",
+    "chatbot",
+    "sovereign",
+    "ia",
+    "ki"
+  ],
+  "cover_image": "https://raw.githubusercontent.com/William-De71/gladys-ovhcloud-ai-endpoints/main/cover.jpg",
+  "transports": ["cloud"],
+  "config_schema": [
+    {
+      "key": "intro",
+      "type": "section",
+      "label": {
+        "en": "Getting started",
+        "fr": "Pour commencer",
+        "de": "Erste Schritte",
+        "es": "Primeros pasos"
+      },
+      "description": {
+        "en": "AI Endpoints is the AI service of OVHcloud: open models (OpenAI GPT-OSS, Qwen, Mistral…) served from its data centres in the European Union, billed per token to a Public Cloud project. Create an API key in the OVHcloud Control Panel (Public Cloud, AI & Machine Learning, AI Endpoints, API keys), paste it below, then select this integration in Settings, Artificial Intelligence. AI Endpoints then sees every chat message, the history, the state of the devices the assistant reads and the chat images; OVHcloud says it keeps no prompt and trains no model on them.",
+        "fr": "AI Endpoints est le service d’IA d’OVHcloud : des modèles ouverts (OpenAI GPT-OSS, Qwen, Mistral…) servis depuis ses centres de données de l’Union européenne, facturés au jeton sur un projet Public Cloud. Créez une clé d’API dans l’espace client OVHcloud (Public Cloud, AI & Machine Learning, AI Endpoints, API keys), collez-la ci-dessous, puis choisissez cette intégration dans Paramètres, Intelligence artificielle. AI Endpoints voit alors chaque message du chat, l’historique, l’état des appareils que l’assistant lit et les images du chat ; OVHcloud indique ne conserver aucune requête et n’entraîner aucun modèle avec.",
+        "de": "AI Endpoints ist der KI-Dienst von OVHcloud: offene Modelle (OpenAI GPT-OSS, Qwen, Mistral …) aus seinen Rechenzentren in der Europäischen Union, pro Token über ein Public-Cloud-Projekt abgerechnet. Erstelle einen API-Schlüssel im OVHcloud Control Panel (Public Cloud, AI & Machine Learning, AI Endpoints, API keys), füge ihn unten ein und wähle dann diese Integration unter Einstellungen, Künstliche Intelligenz. AI Endpoints sieht dann jede Chat-Nachricht, den Verlauf, den Zustand der Geräte, die der Assistent liest, und die Chat-Bilder; OVHcloud gibt an, keine Anfragen zu speichern und kein Modell damit zu trainieren.",
+        "es": "AI Endpoints es el servicio de IA de OVHcloud: modelos abiertos (OpenAI GPT-OSS, Qwen, Mistral…) servidos desde sus centros de datos de la Unión Europea, facturados por token a un proyecto Public Cloud. Cree una clave de API en el área de cliente de OVHcloud (Public Cloud, AI & Machine Learning, AI Endpoints, API keys), péguela abajo y luego elija esta integración en Ajustes, Inteligencia artificial. AI Endpoints verá entonces cada mensaje del chat, el historial, el estado de los dispositivos que lee el asistente y las imágenes del chat; OVHcloud afirma no conservar ninguna solicitud ni entrenar ningún modelo con ellas."
+      }
+    },
+    {
+      "key": "billing_info",
+      "type": "section",
+      "label": {
+        "en": "Price and limits",
+        "fr": "Prix et limites",
+        "de": "Preis und Limits",
+        "es": "Precio y límites"
+      },
+      "description": {
+        "en": "The Public Cloud project needs a payment method: a project in Discovery mode is refused. You pay per token, a few cents a day for a household with GPT-OSS 120B; the widget estimates the cost from the catalog prices (in US dollars), and the bill of the project stays the reference. Limit: 400 requests a minute per project and per model. Without a key, AI Endpoints now allows a single request per year: a key is required.",
+        "fr": "Le projet Public Cloud doit avoir un moyen de paiement : un projet en mode Découverte est refusé. Vous payez au jeton, quelques centimes par jour pour un foyer avec GPT-OSS 120B ; le widget estime le coût d’après les prix du catalogue (en dollars US), la facture du projet restant la référence. Limite : 400 requêtes par minute, par projet et par modèle. Sans clé, AI Endpoints n’accepte plus qu’une requête par an : la clé est indispensable.",
+        "de": "Das Public-Cloud-Projekt braucht eine Zahlungsmethode: Ein Projekt im Discovery-Modus wird abgelehnt. Du zahlst pro Token, für einen Haushalt mit GPT-OSS 120B ein paar Cent am Tag; das Widget schätzt die Kosten anhand der Katalogpreise (in US-Dollar), maßgeblich bleibt die Rechnung des Projekts. Limit: 400 Anfragen pro Minute je Projekt und Modell. Ohne Schlüssel erlaubt AI Endpoints nur noch eine Anfrage pro Jahr: Ein Schlüssel ist nötig.",
+        "es": "El proyecto Public Cloud necesita un método de pago: un proyecto en modo Discovery se rechaza. Se paga por token, unos céntimos al día para un hogar con GPT-OSS 120B; el widget estima el coste con los precios del catálogo (en dólares estadounidenses) y la factura del proyecto sigue siendo la referencia. Límite: 400 solicitudes por minuto por proyecto y modelo. Sin clave, AI Endpoints solo acepta ya una solicitud al año: la clave es imprescindible."
+      }
+    },
+    {
+      "key": "api_key",
+      "type": "secret",
+      "required": true,
+      "label": {
+        "en": "AI Endpoints API key",
+        "fr": "Clé d’API AI Endpoints",
+        "de": "AI-Endpoints-API-Schlüssel",
+        "es": "Clave de API de AI Endpoints"
+      },
+      "description": {
+        "en": "Created in the OVHcloud Control Panel, shown only once. It stays in Gladys and is never shown again nor logged. Set an expiry date if you like: the status says when it is refused.",
+        "fr": "Créée dans l’espace client OVHcloud, affichée une seule fois. Elle reste dans Gladys, n’est plus jamais affichée ni journalisée. Donnez-lui une date d’expiration si vous voulez : l’état indique quand elle est refusée.",
+        "de": "Erstellt im OVHcloud Control Panel, wird nur einmal angezeigt. Er bleibt in Gladys und wird nie wieder angezeigt oder protokolliert. Gib ihm ein Ablaufdatum, wenn du willst: Der Status zeigt, wenn er abgelehnt wird.",
+        "es": "Creada en el área de cliente de OVHcloud, se muestra una sola vez. Se queda en Gladys y nunca se vuelve a mostrar ni se registra. Póngale una fecha de caducidad si lo desea: el estado indica cuándo se rechaza."
+      }
+    },
+    {
+      "key": "model",
+      "type": "select",
+      "required": true,
+      "default": "gpt-oss-120b",
+      "label": {
+        "en": "Chat model",
+        "fr": "Modèle du chat",
+        "de": "Chat-Modell",
+        "es": "Modelo del chat"
+      },
+      "description": {
+        "en": "Answers the chat, creates the scenes and writes the weekly digest. GPT-OSS 120B is capable and cheap; Qwen 3.5 397B is the largest and also reads the images of the chat; Mistral Small 3.2 is the fastest.",
+        "fr": "Répond au chat, crée les scènes et rédige le résumé hebdomadaire. GPT-OSS 120B est capable et peu cher ; Qwen 3.5 397B est le plus gros et lit aussi les images du chat ; Mistral Small 3.2 est le plus rapide.",
+        "de": "Beantwortet den Chat, erstellt die Szenen und schreibt den Wochenrückblick. GPT-OSS 120B ist leistungsfähig und günstig; Qwen 3.5 397B ist das größte und liest auch die Bilder des Chats; Mistral Small 3.2 ist das schnellste.",
+        "es": "Responde al chat, crea las escenas y redacta el resumen semanal. GPT-OSS 120B es capaz y económico; Qwen 3.5 397B es el más grande y además lee las imágenes del chat; Mistral Small 3.2 es el más rápido."
+      },
+      "options": [
+        {
+          "value": "gpt-oss-120b",
+          "label": {
+            "en": "GPT-OSS 120B (recommended)",
+            "fr": "GPT-OSS 120B (recommandé)",
+            "de": "GPT-OSS 120B (empfohlen)",
+            "es": "GPT-OSS 120B (recomendado)"
+          }
+        },
+        {
+          "value": "Qwen3.5-397B-A17B",
+          "label": {
+            "en": "Qwen 3.5 397B (reads images)",
+            "fr": "Qwen 3.5 397B (lit les images)",
+            "de": "Qwen 3.5 397B (liest Bilder)",
+            "es": "Qwen 3.5 397B (lee imágenes)"
+          }
+        },
+        {
+          "value": "Mistral-Small-3.2-24B-Instruct-2506",
+          "label": {
+            "en": "Mistral Small 3.2",
+            "fr": "Mistral Small 3.2",
+            "de": "Mistral Small 3.2",
+            "es": "Mistral Small 3.2"
+          }
+        },
+        {
+          "value": "qwen3.6-35b-a3b",
+          "label": {
+            "en": "Qwen 3.6 35B",
+            "fr": "Qwen 3.6 35B",
+            "de": "Qwen 3.6 35B",
+            "es": "Qwen 3.6 35B"
+          }
+        },
+        {
+          "value": "gpt-oss-20b",
+          "label": {
+            "en": "GPT-OSS 20B",
+            "fr": "GPT-OSS 20B",
+            "de": "GPT-OSS 20B",
+            "es": "GPT-OSS 20B"
+          }
+        },
+        {
+          "value": "custom",
+          "label": {
+            "en": "Other model (id below)",
+            "fr": "Autre modèle (identifiant ci-dessous)",
+            "de": "Anderes Modell (ID unten)",
+            "es": "Otro modelo (identificador abajo)"
+          }
+        }
+      ]
+    },
+    {
+      "key": "fast_model",
+      "type": "select",
+      "required": true,
+      "default": "Mistral-Small-3.2-24B-Instruct-2506",
+      "label": {
+        "en": "Router model",
+        "fr": "Modèle du routeur",
+        "de": "Router-Modell",
+        "es": "Modelo del enrutador"
+      },
+      "description": {
+        "en": "Sorts every chat message before the answer, and must reply within 20 seconds: Mistral Small 3.2 does not reason and answers fast.",
+        "fr": "Trie chaque message du chat avant la réponse, et doit répondre en moins de 20 secondes : Mistral Small 3.2 ne réfléchit pas et répond vite.",
+        "de": "Sortiert jede Chat-Nachricht vor der Antwort und muss innerhalb von 20 Sekunden antworten: Mistral Small 3.2 denkt nicht nach und antwortet schnell.",
+        "es": "Clasifica cada mensaje del chat antes de la respuesta y debe contestar en menos de 20 segundos: Mistral Small 3.2 no razona y responde rápido."
+      },
+      "options": [
+        {
+          "value": "Mistral-Small-3.2-24B-Instruct-2506",
+          "label": {
+            "en": "Mistral Small 3.2 (recommended)",
+            "fr": "Mistral Small 3.2 (recommandé)",
+            "de": "Mistral Small 3.2 (empfohlen)",
+            "es": "Mistral Small 3.2 (recomendado)"
+          }
+        },
+        {
+          "value": "gpt-oss-20b",
+          "label": {
+            "en": "GPT-OSS 20B",
+            "fr": "GPT-OSS 20B",
+            "de": "GPT-OSS 20B",
+            "es": "GPT-OSS 20B"
+          }
+        },
+        {
+          "value": "qwen3.6-35b-a3b",
+          "label": {
+            "en": "Qwen 3.6 35B",
+            "fr": "Qwen 3.6 35B",
+            "de": "Qwen 3.6 35B",
+            "es": "Qwen 3.6 35B"
+          }
+        },
+        {
+          "value": "gpt-oss-120b",
+          "label": {
+            "en": "GPT-OSS 120B",
+            "fr": "GPT-OSS 120B",
+            "de": "GPT-OSS 120B",
+            "es": "GPT-OSS 120B"
+          }
+        },
+        {
+          "value": "custom",
+          "label": {
+            "en": "Other model (id below)",
+            "fr": "Autre modèle (identifiant ci-dessous)",
+            "de": "Anderes Modell (ID unten)",
+            "es": "Otro modelo (identificador abajo)"
+          }
+        }
+      ]
+    },
+    {
+      "key": "custom_model",
+      "type": "string",
+      "required": false,
+      "placeholder": {
+        "en": "Meta-Llama-3_3-70B-Instruct",
+        "fr": "Meta-Llama-3_3-70B-Instruct",
+        "de": "Meta-Llama-3_3-70B-Instruct",
+        "es": "Meta-Llama-3_3-70B-Instruct"
+      },
+      "label": {
+        "en": "Other model id",
+        "fr": "Identifiant de l’autre modèle",
+        "de": "ID des anderen Modells",
+        "es": "Identificador del otro modelo"
+      },
+      "description": {
+        "en": "Only for “Other model”: the exact id from the AI Endpoints catalog (case matters), such as a newer model. It must support function calling.",
+        "fr": "Seulement pour « Autre modèle » : l’identifiant exact pris dans le catalogue d’AI Endpoints (majuscules comprises), par exemple un modèle plus récent. Il doit savoir appeler des outils (function calling).",
+        "de": "Nur für „Anderes Modell“: die genaue ID aus dem Katalog von AI Endpoints (Groß- und Kleinschreibung zählt), etwa ein neueres Modell. Es muss Function Calling beherrschen.",
+        "es": "Solo para «Otro modelo»: el identificador exacto del catálogo de AI Endpoints (con mayúsculas y minúsculas), por ejemplo un modelo más reciente. Debe admitir llamadas a funciones."
+      }
+    },
+    {
+      "key": "reasoning",
+      "type": "select",
+      "required": true,
+      "default": "low",
+      "label": {
+        "en": "Reasoning of the chat model",
+        "fr": "Réflexion du modèle du chat",
+        "de": "Nachdenken des Chat-Modells",
+        "es": "Razonamiento del modelo del chat"
+      },
+      "description": {
+        "en": "More reasoning gives better scenes but slower answers that use more tokens. GPT-OSS cannot turn reasoning off (“Off” gives it the low level); Mistral Small 3.2 never reasons.",
+        "fr": "Plus de réflexion donne de meilleures scènes mais des réponses plus lentes qui consomment plus de jetons. GPT-OSS ne peut pas la couper (« Désactivée » lui donne le niveau faible) ; Mistral Small 3.2 ne réfléchit jamais.",
+        "de": "Mehr Nachdenken ergibt bessere Szenen, aber langsamere Antworten mit mehr Tokens. GPT-OSS kann es nicht abschalten („Aus“ ergibt die niedrige Stufe); Mistral Small 3.2 denkt nie nach.",
+        "es": "Más razonamiento da mejores escenas pero respuestas más lentas que consumen más tokens. GPT-OSS no puede desactivarlo («Desactivado» le da el nivel bajo); Mistral Small 3.2 nunca razona."
+      },
+      "options": [
+        {
+          "value": "none",
+          "label": {
+            "en": "Off",
+            "fr": "Désactivée",
+            "de": "Aus",
+            "es": "Desactivado"
+          }
+        },
+        {
+          "value": "low",
+          "label": {
+            "en": "Low (recommended)",
+            "fr": "Faible (recommandé)",
+            "de": "Niedrig (empfohlen)",
+            "es": "Bajo (recomendado)"
+          }
+        },
+        {
+          "value": "medium",
+          "label": {
+            "en": "Medium",
+            "fr": "Moyenne",
+            "de": "Mittel",
+            "es": "Medio"
+          }
+        },
+        {
+          "value": "high",
+          "label": {
+            "en": "High",
+            "fr": "Élevée",
+            "de": "Hoch",
+            "es": "Alto"
+          }
+        }
+      ]
+    },
+    {
+      "key": "max_tokens",
+      "type": "number",
+      "required": false,
+      "default": 8192,
+      "min": 1024,
+      "max": 32000,
+      "label": {
+        "en": "Maximum answer length (tokens)",
+        "fr": "Longueur maximale d’une réponse (jetons)",
+        "de": "Maximale Antwortlänge (Tokens)",
+        "es": "Longitud máxima de una respuesta (tokens)"
+      },
+      "description": {
+        "en": "A ceiling for one answer, reasoning included: only the tokens written are billed. Raise it if the logs say an answer hit max_tokens.",
+        "fr": "Un plafond pour une réponse, réflexion comprise : seuls les jetons écrits sont facturés. Augmentez-le si les journaux indiquent qu’une réponse a atteint max_tokens.",
+        "de": "Eine Obergrenze für eine Antwort, Nachdenken inbegriffen: Nur die geschriebenen Tokens werden berechnet. Erhöhe sie, wenn die Protokolle melden, dass eine Antwort max_tokens erreicht hat.",
+        "es": "Un límite para una respuesta, razonamiento incluido: solo se facturan los tokens escritos. Auméntelo si los registros indican que una respuesta alcanzó max_tokens."
+      }
+    }
+  ],
+  "actions": [
+    {
+      "key": "test_connection",
+      "timeout_seconds": 60,
+      "label": {
+        "en": "Test the connection",
+        "fr": "Tester la connexion",
+        "de": "Verbindung testen",
+        "es": "Probar la conexión"
+      },
+      "description": {
+        "en": "Asks each chosen model for a one-word answer and shows its time and the requests left this minute.",
+        "fr": "Demande une réponse d’un mot à chaque modèle choisi et affiche son temps et les requêtes restantes pour la minute.",
+        "de": "Bittet jedes gewählte Modell um eine Antwort aus einem Wort und zeigt seine Zeit und die in dieser Minute verbleibenden Anfragen an.",
+        "es": "Pide una respuesta de una palabra a cada modelo elegido y muestra su tiempo y las solicitudes que quedan en este minuto."
+      }
+    }
+  ],
+  "widgets": [
+    {
+      "key": "usage",
+      "icon": "cpu",
+      "label": {
+        "en": "AI Endpoints usage",
+        "fr": "Conso AI Endpoints",
+        "de": "AI-Endpoints-Nutzung",
+        "es": "Consumo AI Endpoints"
+      },
+      "description": {
+        "en": "Requests, tokens and estimated cost of the assistant per day and month, last error.",
+        "fr": "Requêtes, jetons et coût estimé de l’assistant par jour et par mois, dernière erreur.",
+        "de": "Anfragen, Tokens und geschätzte Kosten des Assistenten pro Tag und Monat, letzter Fehler.",
+        "es": "Solicitudes, tokens y coste estimado del asistente por día y mes, último error."
+      }
+    }
+  ],
+  "scene_triggers": [
+    {
+      "key": "error",
+      "label": {
+        "en": "AI Endpoints: the assistant fails",
+        "fr": "AI Endpoints : l’assistant est en erreur",
+        "de": "AI Endpoints: Der Assistent hat einen Fehler",
+        "es": "AI Endpoints: el asistente falla"
+      },
+      "description": {
+        "en": "AI Endpoints stopped answering: key refused, project without payment method, rate limit, request too large, model unavailable, API unreachable. Once per failure, not for every message.",
+        "fr": "AI Endpoints ne répond plus : clé refusée, projet sans moyen de paiement, limite de requêtes, requête trop grosse, modèle indisponible, API injoignable. Une fois par panne, pas à chaque message.",
+        "de": "AI Endpoints antwortet nicht mehr: Schlüssel abgelehnt, Projekt ohne Zahlungsmethode, Anfragelimit, Anfrage zu groß, Modell nicht verfügbar, API nicht erreichbar. Einmal pro Ausfall, nicht bei jeder Nachricht.",
+        "es": "AI Endpoints dejó de responder: clave rechazada, proyecto sin método de pago, límite de solicitudes, solicitud demasiado grande, modelo no disponible, API inaccesible. Una vez por fallo, no en cada mensaje."
+      },
+      "fields": [
+        {
+          "key": "kind",
+          "type": "select",
+          "required": false,
+          "label": {
+            "en": "Only for",
+            "fr": "Seulement pour",
+            "de": "Nur bei",
+            "es": "Solo para"
+          },
+          "description": {
+            "en": "Leave empty for any failure.",
+            "fr": "Laissez vide pour toute panne.",
+            "de": "Leer lassen für jeden Ausfall.",
+            "es": "Déjelo vacío para cualquier fallo."
+          },
+          "options": [
+            {
+              "value": "auth",
+              "label": {
+                "en": "Key refused",
+                "fr": "Clé refusée",
+                "de": "Schlüssel abgelehnt",
+                "es": "Clave rechazada"
+              }
+            },
+            {
+              "value": "project",
+              "label": {
+                "en": "Project without payment method",
+                "fr": "Projet sans moyen de paiement",
+                "de": "Projekt ohne Zahlungsmethode",
+                "es": "Proyecto sin método de pago"
+              }
+            },
+            {
+              "value": "rate_limit",
+              "label": {
+                "en": "Rate limit",
+                "fr": "Limite de requêtes",
+                "de": "Anfragelimit",
+                "es": "Límite de solicitudes"
+              }
+            },
+            {
+              "value": "too_large",
+              "label": {
+                "en": "Request too large",
+                "fr": "Requête trop grosse",
+                "de": "Anfrage zu groß",
+                "es": "Solicitud demasiado grande"
+              }
+            },
+            {
+              "value": "model",
+              "label": {
+                "en": "Model unavailable",
+                "fr": "Modèle indisponible",
+                "de": "Modell nicht verfügbar",
+                "es": "Modelo no disponible"
+              }
+            },
+            {
+              "value": "unreachable",
+              "label": {
+                "en": "API unreachable",
+                "fr": "API injoignable",
+                "de": "API nicht erreichbar",
+                "es": "API inaccesible"
+              }
+            },
+            {
+              "value": "timeout",
+              "label": {
+                "en": "Too slow",
+                "fr": "Trop lent",
+                "de": "Zu langsam",
+                "es": "Demasiado lento"
+              }
+            },
+            {
+              "value": "server",
+              "label": {
+                "en": "AI Endpoints error",
+                "fr": "Erreur d’AI Endpoints",
+                "de": "AI-Endpoints-Fehler",
+                "es": "Error de AI Endpoints"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "kind",
+          "type": "string",
+          "label": {
+            "en": "Kind of failure",
+            "fr": "Type de panne",
+            "de": "Art des Ausfalls",
+            "es": "Tipo de fallo"
+          }
+        },
+        {
+          "key": "message",
+          "type": "string",
+          "label": {
+            "en": "Error message",
+            "fr": "Message d’erreur",
+            "de": "Fehlermeldung",
+            "es": "Mensaje de error"
+          }
+        },
+        {
+          "key": "use",
+          "type": "string",
+          "label": {
+            "en": "Request (chat, router, digest)",
+            "fr": "Requête (chat, router, digest)",
+            "de": "Anfrage (chat, router, digest)",
+            "es": "Solicitud (chat, router, digest)"
+          }
+        },
+        {
+          "key": "model",
+          "type": "string",
+          "label": {
+            "en": "Model",
+            "fr": "Modèle",
+            "de": "Modell",
+            "es": "Modelo"
+          }
+        }
+      ]
+    },
+    {
+      "key": "recovered",
+      "label": {
+        "en": "AI Endpoints: the assistant answers again",
+        "fr": "AI Endpoints : l’assistant répond de nouveau",
+        "de": "AI Endpoints: Der Assistent antwortet wieder",
+        "es": "AI Endpoints: el asistente vuelve a responder"
+      },
+      "description": {
+        "en": "The first answer after a failure.",
+        "fr": "La première réponse après une panne.",
+        "de": "Die erste Antwort nach einem Ausfall.",
+        "es": "La primera respuesta tras un fallo."
+      },
+      "variables": [
+        {
+          "key": "down_minutes",
+          "type": "number",
+          "label": {
+            "en": "Minutes of failure",
+            "fr": "Minutes de panne",
+            "de": "Minuten des Ausfalls",
+            "es": "Minutos de fallo"
+          }
+        }
+      ]
+    }
+  ]
+}
